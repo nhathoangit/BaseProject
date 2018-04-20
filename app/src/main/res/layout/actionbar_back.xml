@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_38dp">
+
+    <ImageView
+        android:id="@+id/actionbar_imgBack"
+        android:layout_width="@dimen/_50dp"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/_12dp"
+        android:paddingEnd="@dimen/_16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_gravity="start|center_vertical"
+        android:src="@drawable/ic_launcher_background"/>
+
+    <TextView
+        android:id="@+id/actionbar_tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="1"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="@dimen/_32dp"
+        android:paddingRight="@dimen/_32dp"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+
+</FrameLayout>
