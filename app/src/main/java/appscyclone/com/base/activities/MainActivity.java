@@ -1,11 +1,10 @@
 package appscyclone.com.base.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import appscyclone.com.base.R;
 import appscyclone.com.base.bases.BaseActivity;
-import appscyclone.com.base.utils.KeyboardUtils;
+import appscyclone.com.base.fragments.FirstFragment;
 
 public class MainActivity extends BaseActivity {
 
@@ -13,6 +12,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        KeyboardUtils.setupUI(getWindow().getDecorView().getRootView(),this);
+        replaceFragment(new FirstFragment(), true, false);
     }
 }

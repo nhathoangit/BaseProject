@@ -28,7 +28,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         if (getContext() != null)
-            view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
+            view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
     }
 
     @Override
@@ -61,6 +61,12 @@ public abstract class BaseFragment extends Fragment {
             });
         }
         return animation;
+    }
+
+    public void setActionBarTitle(View view, String title) {
+        if (getActivity() instanceof BaseActivity) {
+            ((BaseActivity) getActivity()).setActionBarTitle(view, title);
+        }
     }
 
     public FragmentResultListener getResultListener() {

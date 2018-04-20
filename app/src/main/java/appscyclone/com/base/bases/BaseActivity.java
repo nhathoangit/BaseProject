@@ -23,7 +23,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
-    public void setActionBar(View view, String title) {
+    public void setActionBarTitle(View view, String title) {
         TextView tvTitle = view.findViewById(R.id.actionbar_tvTitle);
         View vBack = view.findViewById(R.id.actionbar_imgBack);
         if (tvTitle != null) {
