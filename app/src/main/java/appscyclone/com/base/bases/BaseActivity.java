@@ -9,18 +9,26 @@ import android.view.View;
 import android.widget.TextView;
 
 import appscyclone.com.base.R;
+import appscyclone.com.base.interfaces.ApiResponseListener;
 import appscyclone.com.base.models.CustomTransaction;
+import appscyclone.com.base.models.ErrorModel;
+import appscyclone.com.base.network.builder.ApiBaseHandler;
+import appscyclone.com.base.network.builder.ApiClient;
 
 /*
  * Created by NhatHoang on 20/04/2018.
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements ApiResponseListener {
+
+    public ApiClient mApiClient;
 
     View.OnClickListener onBackClick = view -> onBackPressed();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ApiBaseHandler mBaseHandler = new ApiBaseHandler(this, this);
+        mApiClient = new ApiClient(mBaseHandler.requestListener, (BaseApplication) getApplication());
     }
 
     public void setActionBarTitle(View view, String title) {
@@ -73,4 +81,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onDataError(int nCode, ErrorModel t) {
+
+    }
+
+    @Override
+    public void onDataResponse(int nCode, BaseModel nData) {
+
+    }
 }

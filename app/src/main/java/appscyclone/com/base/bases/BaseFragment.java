@@ -10,19 +10,27 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import appscyclone.com.base.R;
+import appscyclone.com.base.interfaces.ApiResponseListener;
 import appscyclone.com.base.interfaces.FragmentResultListener;
+import appscyclone.com.base.models.ErrorModel;
+import appscyclone.com.base.network.builder.ApiBaseHandler;
+import appscyclone.com.base.network.builder.ApiClient;
 
 /*
  * Created by NhatHoang on 20/04/2018.
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements ApiResponseListener {
 
     private FragmentResultListener resultListener;
     private int mCodeRequest;
+    public ApiClient mApiClient;
+    private ApiBaseHandler mBaseHandler;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mBaseHandler = new ApiBaseHandler((BaseActivity) getActivity(), this);
+        mApiClient = new ApiClient(mBaseHandler.requestListener, (BaseApplication) getActivity().getApplication());
     }
 
     @Override
@@ -106,4 +114,19 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDataError(int nCode, ErrorModel t) {
+
+    }
+
+    @Override
+    public void onDataResponse(int nCode, BaseModel nData) {
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mBaseHandler.setResponseEnable(false);
+    }
 }

@@ -36,8 +36,12 @@ public class FirstFragment extends BaseFragment {
         unbinder.unbind();
     }
 
+    private void getUser(){
+
+    }
+
     @OnClick(R.id.fragFirst_btnTest)
     public void onViewClicked() {
-        addFragment(new SecondFragment(), true, true);
+        getUser();
     }
 }
