@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">base</string>
+
+    <string name="error">Error</string>
+    <string name="error_server">Error retrieving information from server</string>
+    <string name="error_parse_json">okhttp3.internal.http.RealResponseBody</string>
+    <string name="error_parse_type"><![CDATA[Value <!DOCTYPE of type]]></string>
+
+    <string name="ok">OK</string>
+    <string name="no">NO</string>
 </resources>

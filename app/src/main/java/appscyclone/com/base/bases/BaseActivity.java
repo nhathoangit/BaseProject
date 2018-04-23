@@ -14,6 +14,7 @@ import appscyclone.com.base.models.CustomTransaction;
 import appscyclone.com.base.models.ErrorModel;
 import appscyclone.com.base.network.builder.ApiBaseHandler;
 import appscyclone.com.base.network.builder.ApiClient;
+import appscyclone.com.base.utils.AppUtils;
 
 /*
  * Created by NhatHoang on 20/04/2018.
@@ -80,10 +81,12 @@ public abstract class BaseActivity extends AppCompatActivity implements ApiRespo
         }
     }
 
-
     @Override
-    public void onDataError(int nCode, ErrorModel t) {
-
+    public void onDataError(int nCode, ErrorModel error) {
+        if (error.getMessage().contains(getString(R.string.error_parse_json)) || error.getMessage().contains(getString(R.string.error_parse_type)))
+            AppUtils.showAlert(this, getString(R.string.error), getString(R.string.error_server), null);
+        else
+            AppUtils.showAlert(this, getString(R.string.error), error.getMessage(), null);
     }
 
     @Override
