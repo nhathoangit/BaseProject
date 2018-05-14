@@ -11,6 +11,10 @@ public class BasePresenter<V extends MvpView> implements IPresenter<V> {
     private V view;
     private CompositeDisposable compositeDisposable;
 
+    public BasePresenter() {
+        this.compositeDisposable = new CompositeDisposable();
+    }
+
     @Override
     public void onAttach(V mvpView) {
         this.view = mvpView;

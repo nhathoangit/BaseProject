@@ -18,7 +18,6 @@ public class BaseApplication extends Application {
         super.onCreate();
         mApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this)).build();
-
         mApplicationComponent.inject(this);
     }
 
