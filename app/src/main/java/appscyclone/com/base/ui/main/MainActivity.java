@@ -17,7 +17,6 @@ public class MainActivity extends BaseActivity implements MainContract.MainView 
 
     @Inject
     MainPresenterImp presenter;
-
     @Inject
     StoryApi storyApi;
 
