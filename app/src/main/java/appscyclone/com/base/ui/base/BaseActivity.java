@@ -4,9 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import appscyclone.com.base.dagger.component.ActivityComponent;
-import appscyclone.com.base.dagger.component.DaggerActivityComponent;
-import appscyclone.com.base.dagger.module.ActivityModule;
 import appscyclone.com.base.others.dialog.LoadingDialog;
 import appscyclone.com.base.utils.NetworkUtils;
 
@@ -15,20 +12,11 @@ import appscyclone.com.base.utils.NetworkUtils;
  */
 public abstract class BaseActivity extends AppCompatActivity implements MvpView {
 
-    private ActivityComponent mActivityComponent;
     private LoadingDialog mDialogView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActivityComponent = DaggerActivityComponent.builder()
-                .activityModule(new ActivityModule(this))
-                .applicationComponent(BaseApplication.get(this).getComponent())
-                .build();
-    }
-
-    public ActivityComponent getActivityComponent() {
-        return mActivityComponent;
     }
 
     @Override

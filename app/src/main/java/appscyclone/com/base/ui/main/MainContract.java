@@ -1,5 +1,7 @@
 package appscyclone.com.base.ui.main;
 
+import appscyclone.com.base.data.network.api.StoryApi;
+import appscyclone.com.base.data.network.model.ResStoryModel;
 import appscyclone.com.base.ui.base.MvpView;
 
 /*
@@ -7,10 +9,10 @@ import appscyclone.com.base.ui.base.MvpView;
  */
 public interface MainContract {
     interface MainView extends MvpView {
-        void ToastMess(String mess);
+        void loadListStories(ResStoryModel resStoryModel);
     }
 
     interface MainPresenter {
-        void ToastMess(String mess);
+        void getListStories(StoryApi storyApi);
     }
 }
