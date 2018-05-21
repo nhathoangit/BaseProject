@@ -10,5 +10,8 @@ public interface MvpView {
 
     boolean isNetworkConnected();
 
+    void addFragment(BaseFragment fragment, boolean isAddToBackStack, boolean isAnimation);
+
+    void replaceFragment(BaseFragment fragment, boolean isAddToBackStack, boolean isAnimation);
 
 }

@@ -10,6 +10,7 @@ import appscyclone.com.base.data.network.api.StoryApi;
 import appscyclone.com.base.data.network.model.ResStoryModel;
 import appscyclone.com.base.ui.base.BaseActivity;
 import appscyclone.com.base.ui.base.BaseApplication;
+import appscyclone.com.base.ui.base.BaseFragment;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -44,4 +45,5 @@ public class MainActivity extends BaseActivity implements MainContract.MainView 
     public void loadListStories(ResStoryModel resStoryModel) {
 
     }
+
 }

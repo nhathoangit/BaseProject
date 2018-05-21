@@ -11,6 +11,7 @@ import appscyclone.com.base.R;
 import appscyclone.com.base.data.local.CustomTransaction;
 import appscyclone.com.base.others.dialog.LoadingDialog;
 import appscyclone.com.base.utils.NetworkUtils;
+import butterknife.Unbinder;
 
 /*
  * Created by NhatHoang on 14/05/2018.
@@ -18,6 +19,7 @@ import appscyclone.com.base.utils.NetworkUtils;
 public abstract class BaseActivity extends AppCompatActivity implements MvpView {
 
     private LoadingDialog mDialogView;
+    private Unbinder mUnBinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +50,28 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        if (mUnBinder != null) {
+            mUnBinder.unbind();
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    public void addFragment(BaseFragment fragment, boolean isAddToBackStack, boolean isAnimation) {
+        addReplaceFragment(new CustomTransaction(isAnimation), fragment, false, isAddToBackStack);
+    }
+
+    @Override
+    public void replaceFragment(BaseFragment fragment, boolean isAddToBackStack, boolean isAnimation) {
+        addReplaceFragment(new CustomTransaction(isAnimation), fragment, true, isAddToBackStack);
+    }
+
+    public void setUnBinder(Unbinder unBinder) {
+        mUnBinder = unBinder;
+    }
+
     private void addReplaceFragment(CustomTransaction customTransaction, BaseFragment fragment, boolean isReplace, boolean isAddToBackStack) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager != null && fragment != null) {
@@ -68,14 +92,6 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
             }
             fragmentTransaction.commit();
         }
-    }
-
-    public void addFragment(BaseFragment fragment, boolean isAddToBackStack, boolean isAnimation) {
-        addReplaceFragment(new CustomTransaction(isAnimation), fragment, false, isAddToBackStack);
-    }
-
-    public void replaceFragment(BaseFragment fragment, boolean isAddToBackStack, boolean isAnimation) {
-        addReplaceFragment(new CustomTransaction(isAnimation), fragment, true, isAddToBackStack);
     }
 
     public void clearAllBackStack() {
