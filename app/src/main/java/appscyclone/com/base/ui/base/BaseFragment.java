@@ -44,15 +44,21 @@ public abstract class BaseFragment extends Fragment implements MvpView {
         }
     }
 
-    public void setUnBinder(Unbinder unBinder) {
-        mUnBinder = unBinder;
-    }
-
     @Override
     public void onDestroy() {
         if (mUnBinder != null) {
             mUnBinder.unbind();
         }
         super.onDestroy();
+    }
+
+    public void setUnBinder(Unbinder unBinder) {
+        mUnBinder = unBinder;
+    }
+
+    public void clearAllBackStack() {
+        if (getActivity() instanceof BaseActivity) {
+            ((BaseActivity) getActivity()).clearAllBackStack();
+        }
     }
 }

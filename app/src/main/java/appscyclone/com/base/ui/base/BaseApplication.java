@@ -26,7 +26,6 @@ public class BaseApplication extends Application {
                 .applicationModule(new ApplicationModule(this))
                 .networkModule(new NetworkModule(AppConfig.mConnectType))
                 .build();
-        mApplicationComponent.inject(this);
     }
 
     public ApplicationComponent getComponent() {

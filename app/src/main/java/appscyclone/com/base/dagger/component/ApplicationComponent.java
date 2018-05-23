@@ -17,6 +17,5 @@ import dagger.Component;
 @Singleton
 @Component(modules = {ApplicationModule.class, NetworkModule.class})
 public interface ApplicationComponent {
-    void inject(BaseApplication app);
     void inject(MainActivity mainActivity);
 }
