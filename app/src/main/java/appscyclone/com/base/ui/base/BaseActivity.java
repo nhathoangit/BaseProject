@@ -8,14 +8,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import appscyclone.com.base.R;
-import appscyclone.com.base.config.AppConfig;
 import appscyclone.com.base.dagger.component.ActivityComponent;
-import appscyclone.com.base.dagger.component.ApplicationComponent;
-import appscyclone.com.base.dagger.component.DaggerApplicationComponent;
-import appscyclone.com.base.dagger.module.ActivityModule;
-import appscyclone.com.base.dagger.module.NetworkModule;
 import appscyclone.com.base.data.local.CustomTransaction;
 import appscyclone.com.base.others.dialog.LoadingDialog;
+import appscyclone.com.base.ui.main.MainActivity;
 import appscyclone.com.base.utils.NetworkUtils;
 import butterknife.Unbinder;
 
@@ -24,14 +20,18 @@ import butterknife.Unbinder;
  */
 public abstract class BaseActivity extends AppCompatActivity implements MvpView {
 
+    public ActivityComponent mActivityComponent;
     private LoadingDialog mDialogView;
     private Unbinder mUnBinder;
-    public ActivityComponent mActivityComponent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivityComponent = BaseApplication.get(this).getComponent().inject();
+    }
+
+    public ActivityComponent getActivityComponent() {
+        return mActivityComponent;
     }
 
     @Override
@@ -87,13 +87,13 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
             if (customTransaction.isAnimation)
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
             if (isReplace)
-                fragmentTransaction.replace(customTransaction.containerViewId != 0 ? customTransaction.containerViewId : android.R.id.tabcontent, fragment);
+                fragmentTransaction.replace(customTransaction.containerViewId != 0 ? customTransaction.containerViewId : this instanceof MainActivity ? android.R.id.tabcontent : R.id.frmContainer, fragment);
             else {
-                Fragment currentFragment = getSupportFragmentManager().findFragmentById(customTransaction.containerViewId != 0 ? customTransaction.containerViewId : android.R.id.tabcontent);
+                Fragment currentFragment = getSupportFragmentManager().findFragmentById(customTransaction.containerViewId != 0 ? customTransaction.containerViewId : this instanceof MainActivity ? android.R.id.tabcontent : R.id.frmContainer);
                 if (currentFragment != null) {
                     fragmentTransaction.hide(currentFragment);
                 }
-                fragmentTransaction.add(customTransaction.containerViewId != 0 ? customTransaction.containerViewId : android.R.id.tabcontent, fragment, fragment.getClass().getSimpleName());
+                fragmentTransaction.add(customTransaction.containerViewId != 0 ? customTransaction.containerViewId : this instanceof MainActivity ? android.R.id.tabcontent : R.id.frmContainer, fragment, fragment.getClass().getSimpleName());
             }
             if (isAddToBackStack) {
                 fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());

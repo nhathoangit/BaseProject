@@ -1,7 +1,6 @@
 package appscyclone.com.base.ui.main;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -9,8 +8,6 @@ import appscyclone.com.base.R;
 import appscyclone.com.base.data.network.api.StoryApi;
 import appscyclone.com.base.data.network.model.ResStoryModel;
 import appscyclone.com.base.ui.base.BaseActivity;
-import appscyclone.com.base.ui.base.BaseApplication;
-import appscyclone.com.base.ui.base.BaseFragment;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -25,14 +22,14 @@ public class MainActivity extends BaseActivity implements MainContract.MainView 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        mActivityComponent.inject(this);
+        setUnBinder(ButterKnife.bind(this));
+        getActivityComponent().inject(this);
         presenter.onAttach(this);
     }
 
     @OnClick(R.id.actMain_btnTest)
     public void onViewClicked() {
-       presenter.getListStories();
+        presenter.getListStories();
     }
 
     @Override

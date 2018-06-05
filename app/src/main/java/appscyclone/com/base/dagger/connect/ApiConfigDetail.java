@@ -14,6 +14,7 @@ public class ApiConfigDetail {
     public void setBaseURL(String mBaseURL) {
         this.mBaseURL = mBaseURL;
     }
+
     public String getApiKey() {
         return mApiKey;
     }

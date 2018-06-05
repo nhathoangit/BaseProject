@@ -1,11 +1,9 @@
 package appscyclone.com.base.dagger.module;
 
 import android.app.Application;
-import android.content.Context;
 
 import javax.inject.Singleton;
 
-import appscyclone.com.base.ui.main.MainPresenterImp;
 import dagger.Module;
 import dagger.Provides;
 

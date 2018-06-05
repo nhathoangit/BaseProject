@@ -17,10 +17,10 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class MainPresenterImp extends BasePresenter<MainContract.MainView> implements MainContract.MainPresenter{
 
-    StoryApi storyApi;
+    private StoryApi storyApi;
 
     @Inject
-    public MainPresenterImp(StoryApi storyApi) {
+    MainPresenterImp(StoryApi storyApi) {
         this.storyApi = storyApi;
     }
 

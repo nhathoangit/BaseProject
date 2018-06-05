@@ -92,8 +92,6 @@ public class NetworkModule {
                 }
 
                 newString = root.has("data") ? root.opt("data").toString() : stringResponse;
-                if (response.request().url().toString().contains("v2/notifications?"))
-                    newString = stringResponse;
                 return response.newBuilder()
                         .message("Successful")
                         .body(ResponseBody.create(response.body().contentType(),
