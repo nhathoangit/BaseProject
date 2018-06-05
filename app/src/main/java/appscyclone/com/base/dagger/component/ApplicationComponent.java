@@ -5,9 +5,7 @@ import javax.inject.Singleton;
 import appscyclone.com.base.dagger.AppScope;
 import appscyclone.com.base.dagger.module.ApplicationModule;
 import appscyclone.com.base.dagger.module.NetworkModule;
-import appscyclone.com.base.ui.base.BaseActivity;
 import appscyclone.com.base.ui.base.BaseApplication;
-import appscyclone.com.base.ui.main.MainActivity;
 import dagger.Component;
 
 /*
@@ -17,5 +15,7 @@ import dagger.Component;
 @Singleton
 @Component(modules = {ApplicationModule.class, NetworkModule.class})
 public interface ApplicationComponent {
-    void inject(MainActivity mainActivity);
+
+    ActivityComponent inject();
+
 }

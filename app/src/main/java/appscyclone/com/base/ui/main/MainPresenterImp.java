@@ -17,8 +17,15 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class MainPresenterImp extends BasePresenter<MainContract.MainView> implements MainContract.MainPresenter{
 
+    StoryApi storyApi;
+
+    @Inject
+    public MainPresenterImp(StoryApi storyApi) {
+        this.storyApi = storyApi;
+    }
+
     @Override
-    public void getListStories(StoryApi storyApi) {
+    public void getListStories() {
         addSubscribe(storyApi.getStories(1).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<ResStoryModel>() {
             @Override
             public void accept(ResStoryModel resStoryModel) throws Exception {

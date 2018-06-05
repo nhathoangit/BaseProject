@@ -26,13 +26,13 @@ public class MainActivity extends BaseActivity implements MainContract.MainView 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        BaseApplication.get(this).getComponent().inject(this);
+        mActivityComponent.inject(this);
         presenter.onAttach(this);
     }
 
     @OnClick(R.id.actMain_btnTest)
     public void onViewClicked() {
-       presenter.getListStories(storyApi);
+       presenter.getListStories();
     }
 
     @Override

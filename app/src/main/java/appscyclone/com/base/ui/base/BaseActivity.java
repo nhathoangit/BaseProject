@@ -8,6 +8,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import appscyclone.com.base.R;
+import appscyclone.com.base.config.AppConfig;
+import appscyclone.com.base.dagger.component.ActivityComponent;
+import appscyclone.com.base.dagger.component.ApplicationComponent;
+import appscyclone.com.base.dagger.component.DaggerApplicationComponent;
+import appscyclone.com.base.dagger.module.ActivityModule;
+import appscyclone.com.base.dagger.module.NetworkModule;
 import appscyclone.com.base.data.local.CustomTransaction;
 import appscyclone.com.base.others.dialog.LoadingDialog;
 import appscyclone.com.base.utils.NetworkUtils;
@@ -20,10 +26,12 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
 
     private LoadingDialog mDialogView;
     private Unbinder mUnBinder;
+    public ActivityComponent mActivityComponent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mActivityComponent = BaseApplication.get(this).getComponent().inject();
     }
 
     @Override

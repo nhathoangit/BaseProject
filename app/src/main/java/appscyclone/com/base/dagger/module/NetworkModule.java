@@ -11,6 +11,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
+import appscyclone.com.base.dagger.AppScope;
 import appscyclone.com.base.dagger.connect.ApiConfig;
 import appscyclone.com.base.dagger.connect.ApiConfigType;
 import appscyclone.com.base.data.network.api.StoryApi;
@@ -38,6 +41,7 @@ public class NetworkModule {
     }
 
     @Provides
+    @AppScope
     public OkHttpClient provideOkHttpClient(Application app) {
         File cacheDir = new File(app.getCacheDir(), "http");
         return new OkHttpClient.Builder()
@@ -49,6 +53,7 @@ public class NetworkModule {
     }
 
     @Provides
+    @AppScope
     public Retrofit createRetrofit() {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.connectTimeout(1, TimeUnit.MINUTES)
@@ -65,6 +70,7 @@ public class NetworkModule {
     }
 
     @Provides
+    @AppScope
     public StoryApi provideStoryApi(Retrofit restAdapter) {
         return restAdapter.create(StoryApi.class);
     }

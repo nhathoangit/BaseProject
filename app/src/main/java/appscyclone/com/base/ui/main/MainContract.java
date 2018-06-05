@@ -13,6 +13,6 @@ public interface MainContract {
     }
 
     interface MainPresenter {
-        void getListStories(StoryApi storyApi);
+        void getListStories();
     }
 }
