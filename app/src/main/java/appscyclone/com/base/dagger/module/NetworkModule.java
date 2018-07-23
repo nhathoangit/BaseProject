@@ -31,6 +31,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /*
  * Created by NhatHoang on 15/05/2018.
  */
+
+@AppScope
 @Module
 public class NetworkModule {
     private static final long DISK_CACHE_SIZE = 50 * 1024 * 1024; // 50MB
@@ -41,7 +43,6 @@ public class NetworkModule {
     }
 
     @Provides
-    @AppScope
     public OkHttpClient provideOkHttpClient(Application app) {
         File cacheDir = new File(app.getCacheDir(), "http");
         return new OkHttpClient.Builder()
@@ -53,7 +54,6 @@ public class NetworkModule {
     }
 
     @Provides
-    @AppScope
     public Retrofit createRetrofit() {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.connectTimeout(1, TimeUnit.MINUTES)
@@ -70,7 +70,6 @@ public class NetworkModule {
     }
 
     @Provides
-    @AppScope
     public StoryApi provideStoryApi(Retrofit restAdapter) {
         return restAdapter.create(StoryApi.class);
     }
