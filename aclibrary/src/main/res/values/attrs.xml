@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ACRecyclerView">
+        <attr name="layout_empty" format="reference" />
+        <attr name="layout_loadMore" format="reference" />
+        <attr name="color_swipeRefresh" format="reference" />
+        <attr name="color_loadMore" format="reference" />
+        <attr name="rv_space" format="dimension" />
+        <attr name="rv_spaceHeight" format="dimension" />
+        <attr name="rv_spaceEdge" format="dimension" />
+        <attr name="rv_spaceStart" format="dimension" />
+        <attr name="rv_spaceFooter" format="dimension" />
+        <attr name="rv_scrollbarStyle">
+            <enum name="insideOverlay" value="0x0" />
+            <enum name="insideInset" value="0x01000000" />
+            <enum name="outsideOverlay" value="0x02000000" />
+            <enum name="outsideInset" value="0x03000000" />
+        </attr>
+        <attr name="rv_scrollbars">
+            <enum name="vertical" value="1"/>
+            <enum name="horizontal" value="0"/>
+            <enum name="none" value="2"/>
+        </attr>
+        <attr name="rv_hasFixedSize" format="boolean"/>
+    </declare-styleable>
+</resources>
