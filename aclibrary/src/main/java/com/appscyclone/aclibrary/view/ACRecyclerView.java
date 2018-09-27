@@ -5,6 +5,7 @@ package com.appscyclone.aclibrary.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Handler;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.ColorInt;
 import android.support.annotation.LayoutRes;
@@ -33,6 +34,7 @@ import com.appscyclone.aclibrary.view.viewholder.ACTextViewHolder;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import static android.view.animation.Animation.RELATIVE_TO_SELF;
 
@@ -66,7 +68,8 @@ public class ACRecyclerView extends FrameLayout {
                 if (mAdapter != null && !mAdapter.getLoading() && onMoreListener != null && ((mPage < mMaxPage) || (totalItemCount < totalItemsSize))) {
                     mPage++;
                     mAdapter.getData().add(null);
-                    mAdapter.notifyItemInserted(mAdapter.getData().size() - 1);
+                    Handler handler = new Handler();
+                    handler.post(() -> mAdapter.notifyItemInserted(mAdapter.getData().size() - 1));
                     onMoreListener.onLoadMore();
                     mAdapter.setLoading(true);
                 }
