@@ -4,16 +4,14 @@ package com.appscyclone.aclibrary.view.adapter;
  */
 
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.annotation.ArrayRes;
 import android.support.annotation.ColorRes;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,13 +33,15 @@ abstract public class ACBaseAdapter<VH extends ACRecyclerView.ACBaseViewHolder> 
     private boolean isLoading;
     private View viewLoadMore;
     private int mColorLoadMore = -1;
+    private boolean isParentClick;
+    private ACRecyclerView.OnItemListener onItemListener;
+    protected ACBaseAdapter(List<?> data) {
+        this.mData = data;
+    }
 
     public void setParentClick(boolean parentClick) {
         isParentClick = parentClick;
     }
-
-    private boolean isParentClick;
-    private ACRecyclerView.OnItemListener onItemListener;
 
     public void setOnItemListener(ACRecyclerView.OnItemListener itemListener) {
         this.onItemListener = itemListener;
@@ -60,10 +60,6 @@ abstract public class ACBaseAdapter<VH extends ACRecyclerView.ACBaseViewHolder> 
         this.mColorLoadMore = color;
     }
 
-    protected ACBaseAdapter(List<?> data) {
-        this.mData = data;
-    }
-
     @Override
     public int getItemCount() {
         return mData != null ? mData.size() : 0;
@@ -74,8 +70,9 @@ abstract public class ACBaseAdapter<VH extends ACRecyclerView.ACBaseViewHolder> 
         return mData.get(position) == null ? TYPE_LOADING : TYPE_ITEM;
     }
 
+    @NonNull
     @Override
-    public VH onCreateViewHolder(ViewGroup parent, int viewType) {
+    public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_ITEM:
                 VH vh = (VH) onCreateBaseViewHolder(parent, viewType);
@@ -105,10 +102,13 @@ abstract public class ACBaseAdapter<VH extends ACRecyclerView.ACBaseViewHolder> 
                 }
                 return vh;
             case TYPE_LOADING:
-                if (viewLoadMore == null)
-                    viewLoadMore = LayoutInflater.from(parent.getContext()).inflate(R.layout.acview_loading, parent, false);
-                if(viewLoadMore.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams)
-                {
+                /*Fix crash when scroll loadmore */
+                //start
+                viewLoadMore = LayoutInflater.from(parent.getContext()).inflate(R.layout.acview_loading, parent, false);
+                //if (viewLoadMore == null)
+                //    viewLoadMore = LayoutInflater.from(parent.getContext()).inflate(R.layout.acview_loading, parent, false);
+                //end
+                if (viewLoadMore.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams) {
                     ((StaggeredGridLayoutManager.LayoutParams) viewLoadMore.getLayoutParams()).setFullSpan(true);
                 }
                 return (VH) new LoadingViewHolder(viewLoadMore);
@@ -121,10 +121,21 @@ abstract public class ACBaseAdapter<VH extends ACRecyclerView.ACBaseViewHolder> 
     abstract public ACRecyclerView.ACBaseViewHolder onCreateBaseViewHolder(ViewGroup parent, int viewType);
 
     @Override
-    public void onBindViewHolder(VH holder, int position) {
+    public void onBindViewHolder(@NonNull VH holder, int position) {
         holder.bindData(mData.get(position));
     }
 
+    public List<?> getData() {
+        return mData;
+    }
+
+    public boolean getLoading() {
+        return isLoading;
+    }
+
+    public void setLoading(boolean loading) {
+        isLoading = loading;
+    }
 
     private class LoadingViewHolder extends ACRecyclerView.ACBaseViewHolder {
         private ProgressBar progressBar;
@@ -144,17 +155,5 @@ abstract public class ACBaseAdapter<VH extends ACRecyclerView.ACBaseViewHolder> 
         @Override
         public void onCreatedView(View view) {
         }
-    }
-
-    public List<?> getData() {
-        return mData;
-    }
-
-    public boolean getLoading() {
-        return isLoading;
-    }
-
-    public void setLoading(boolean loading) {
-        isLoading = loading;
     }
 }
