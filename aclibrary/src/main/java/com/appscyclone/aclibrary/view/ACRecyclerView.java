@@ -53,6 +53,7 @@ public class ACRecyclerView extends FrameLayout {
     private int mPage = 1, mMaxPage = 1;
     private int mThresholdLoadMore = 3;
     private int totalItemsSize = 1;
+    private Handler handler = new Handler();
     RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
         int lastVisibleItems, totalItemCount;
 
@@ -68,11 +69,11 @@ public class ACRecyclerView extends FrameLayout {
                 if (mAdapter != null && !mAdapter.getLoading() && onMoreListener != null && ((mPage < mMaxPage) || (totalItemCount < totalItemsSize))) {
                     mPage++;
                     mAdapter.getData().add(null);
-                    Handler handler = new Handler();
                     handler.post(() -> mAdapter.notifyItemInserted(mAdapter.getData().size() - 1));
                     onMoreListener.onLoadMore();
                     mAdapter.setLoading(true);
-                }
+                }else
+                    handler.removeCallbacksAndMessages(null);
             }
         }
     };
