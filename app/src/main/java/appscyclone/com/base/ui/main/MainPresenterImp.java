@@ -1,12 +1,9 @@
 package appscyclone.com.base.ui.main;
 
-import android.widget.Toast;
-
 import javax.inject.Inject;
 
 import appscyclone.com.base.data.network.api.StoryApi;
 import appscyclone.com.base.data.network.model.ResStoryModel;
-import appscyclone.com.base.ui.base.BaseApplication;
 import appscyclone.com.base.ui.base.BasePresenter;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;

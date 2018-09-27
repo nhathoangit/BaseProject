@@ -2,6 +2,9 @@ package appscyclone.com.base.ui.base;
 
 import android.support.v4.app.Fragment;
 
+import java.util.Objects;
+
+import appscyclone.com.base.dagger.component.ActivityComponent;
 import butterknife.Unbinder;
 
 /*
@@ -45,11 +48,11 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroyView() {
         if (mUnBinder != null) {
             mUnBinder.unbind();
         }
-        super.onDestroy();
+        super.onDestroyView();
     }
 
     public void setUnBinder(Unbinder unBinder) {
@@ -61,4 +64,9 @@ public abstract class BaseFragment extends Fragment implements MvpView {
             ((BaseActivity) getActivity()).clearAllBackStack();
         }
     }
+
+    public ActivityComponent getActivityComponent() {
+        return ((BaseActivity) Objects.requireNonNull(getActivity())).getActivityComponent();
+    }
+
 }

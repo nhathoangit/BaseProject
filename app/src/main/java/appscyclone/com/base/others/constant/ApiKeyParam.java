@@ -5,4 +5,6 @@ package appscyclone.com.base.others.constant;
  */
 public class ApiKeyParam {
     public static final String TEXT = "text";
+    public static final String PAGE = "page";
+    public static final String PER_PAGE = "per_page";
 }

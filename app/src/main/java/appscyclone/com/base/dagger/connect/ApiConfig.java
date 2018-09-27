@@ -14,7 +14,7 @@ public class ApiConfig {
                 connection.setBaseURL("https://api.themoviedb.org/3/");
                 break;
             case STAGING:
-                connection.setBaseURL("http://windhost.esy.es/");
+                connection.setBaseURL("https://api.chc.app/v1/content/chc/");
                 break;
             case PRELIVE:
                 connection.setBaseURL("https://prelive.fxchange.rmlbs.co/api/v1/");

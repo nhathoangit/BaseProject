@@ -87,13 +87,13 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
             if (customTransaction.isAnimation)
                 fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
             if (isReplace)
-                fragmentTransaction.replace(customTransaction.containerViewId != 0 ? customTransaction.containerViewId : this instanceof MainActivity ? android.R.id.tabcontent : R.id.frmContainer, fragment);
+                fragmentTransaction.replace(customTransaction.containerViewId != 0 ? customTransaction.containerViewId : this instanceof MainActivity ? R.id.frmContainer : R.id.frmContainer, fragment);
             else {
-                Fragment currentFragment = getSupportFragmentManager().findFragmentById(customTransaction.containerViewId != 0 ? customTransaction.containerViewId : this instanceof MainActivity ? android.R.id.tabcontent : R.id.frmContainer);
+                Fragment currentFragment = getSupportFragmentManager().findFragmentById(customTransaction.containerViewId != 0 ? customTransaction.containerViewId : this instanceof MainActivity ? R.id.frmContainer : R.id.frmContainer);
                 if (currentFragment != null) {
                     fragmentTransaction.hide(currentFragment);
                 }
-                fragmentTransaction.add(customTransaction.containerViewId != 0 ? customTransaction.containerViewId : this instanceof MainActivity ? android.R.id.tabcontent : R.id.frmContainer, fragment, fragment.getClass().getSimpleName());
+                fragmentTransaction.add(customTransaction.containerViewId != 0 ? customTransaction.containerViewId : this instanceof MainActivity ? R.id.frmContainer : R.id.frmContainer, fragment, fragment.getClass().getSimpleName());
             }
             if (isAddToBackStack) {
                 fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());

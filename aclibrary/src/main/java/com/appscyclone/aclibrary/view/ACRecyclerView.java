@@ -50,6 +50,7 @@ public class ACRecyclerView extends FrameLayout {
     private int mScrollbar;
     private int mPage = 1, mMaxPage = 1;
     private int mThresholdLoadMore = 3;
+    private int totalItemsSize = 1;
     RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
         int lastVisibleItems, totalItemCount;
 
@@ -62,7 +63,7 @@ public class ACRecyclerView extends FrameLayout {
             else if (mLayoutManager instanceof StaggeredGridLayoutManager)
                 lastVisibleItems = ((StaggeredGridLayoutManager) mLayoutManager).findLastVisibleItemPositions(null)[0];
             if (totalItemCount <= (lastVisibleItems + mThresholdLoadMore)) {
-                if (mAdapter != null && !mAdapter.getLoading() && onMoreListener != null && (mPage < mMaxPage)) {
+                if (mAdapter != null && !mAdapter.getLoading() && onMoreListener != null && ((mPage < mMaxPage) || (totalItemCount < totalItemsSize))) {
                     mPage++;
                     mAdapter.getData().add(null);
                     mAdapter.notifyItemInserted(mAdapter.getData().size() - 1);
@@ -72,7 +73,7 @@ public class ACRecyclerView extends FrameLayout {
             }
         }
     };
-    private int mScrollbarStyle,mHeight;
+    private int mScrollbarStyle, mHeight;
     private int mSpace, mSpaceItem, mSpaceStart, mSpaceFooter, mSpaceEdge, mColorSwipeRefresh, mColorLoadMore;
     private boolean mHasFixedSize;
 
@@ -93,11 +94,11 @@ public class ACRecyclerView extends FrameLayout {
     }
 
     private void initAttrs(AttributeSet attrs) {
-        int[] stringAttrs = new int[] {android.R.attr.layout_height};
+        int[] stringAttrs = new int[]{android.R.attr.layout_height};
         TypedArray height = getContext().obtainStyledAttributes(attrs, stringAttrs);
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ACRecyclerView);
         try {
-            mHeight=height.getLayoutDimension(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+            mHeight = height.getLayoutDimension(0, ViewGroup.LayoutParams.WRAP_CONTENT);
             mScrollbar = a.getInteger(R.styleable.ACRecyclerView_rv_scrollbars, -1);
             mScrollbarStyle = a.getInteger(R.styleable.ACRecyclerView_rv_scrollbarStyle, -1);
             mHasFixedSize = a.getBoolean(R.styleable.ACRecyclerView_rv_hasFixedSize, true);
@@ -120,8 +121,8 @@ public class ACRecyclerView extends FrameLayout {
         if (isInEditMode()) {
             return;
         }
-        View view = LayoutInflater.from(getContext()).inflate(mHeight==-2?R.layout.acview_wrap_content_recylerview:R.layout.acview_recylerview, this);
-        if(mHeight!=-2) {
+        View view = LayoutInflater.from(getContext()).inflate(mHeight == -2 ? R.layout.acview_wrap_content_recylerview : R.layout.acview_recylerview, this);
+        if (mHeight != -2) {
             swipeRefresh = view.findViewById(R.id.acViewRecyclerView_swipeRefresh);
             swipeRefresh.setEnabled(false);
         }
@@ -172,7 +173,7 @@ public class ACRecyclerView extends FrameLayout {
     }
 
     public void setLayoutManager(RecyclerView.LayoutManager manager) {
-        if (manager instanceof GridLayoutManager&& onMoreListener!=null) {
+        if (manager instanceof GridLayoutManager && onMoreListener != null) {
             GridLayoutManager gridLayoutManager = (GridLayoutManager) manager;
             gridLayoutManager.setSpanSizeLookup(obtainGridSpanSizeLookUp(gridLayoutManager.getSpanCount()));
         }
@@ -273,13 +274,12 @@ public class ACRecyclerView extends FrameLayout {
         showRecycler();
     }
 
-    public void setAdapter(Class viewHolderParentClass, Class viewHolderChildClass, List<? extends ACBaseGroupModel> data)
-    {
-        setAdapter(viewHolderParentClass,viewHolderChildClass,data,false);
+    public void setAdapter(Class viewHolderParentClass, Class viewHolderChildClass, List<? extends ACBaseGroupModel> data) {
+        setAdapter(viewHolderParentClass, viewHolderChildClass, data, false);
     }
 
-    public void setAdapter(Class viewHolderParentClass, Class viewHolderChildClass, List<? extends ACBaseGroupModel> data,boolean isExpandAll) {
-        recyclerView.setAdapter(new ACExpandBaseAdapter(data,isExpandAll) {
+    public void setAdapter(Class viewHolderParentClass, Class viewHolderChildClass, List<? extends ACBaseGroupModel> data, boolean isExpandAll) {
+        recyclerView.setAdapter(new ACExpandBaseAdapter(data, isExpandAll) {
             @Override
             public ACParentViewHolder onCreateGroupViewHolder(ViewGroup parent, int viewType) {
                 return createConstructorViewHolder(viewHolderParentClass, parent, viewType);
@@ -387,7 +387,7 @@ public class ACRecyclerView extends FrameLayout {
         recyclerView.setAdapter(null);
     }
 
-    public void handleDataResponse(int maxPage) {
+    public void handleDataResponseByMaxPages(int maxPage) {
         if (swipeRefresh.isRefreshing()) {
             swipeRefresh.setRefreshing(false);
             RecyclerView.Adapter adapter = recyclerView.getAdapter();
@@ -402,6 +402,23 @@ public class ACRecyclerView extends FrameLayout {
             mAdapter.notifyItemRemoved(mAdapter.getData().size());
         }
         setMaxPage(maxPage);
+    }
+
+    public void handleDataResponseByTotalItems(int totalItemsSize) {
+        if (swipeRefresh.isRefreshing()) {
+            swipeRefresh.setRefreshing(false);
+            RecyclerView.Adapter adapter = recyclerView.getAdapter();
+            if (adapter instanceof ACBaseAdapter) {
+                ((ACBaseAdapter) adapter).getData().clear();
+                adapter.notifyDataSetChanged();
+            }
+        }
+        if (mAdapter.getLoading() && mAdapter.getData().size() > 0 && mAdapter.getData().get(mAdapter.getData().size() - 1) == null) {
+            mAdapter.getData().remove(mAdapter.getData().size() - 1);
+            mAdapter.setLoading(false);
+            mAdapter.notifyItemRemoved(mAdapter.getData().size());
+        }
+        setTotalItemsSize(totalItemsSize);
     }
 
     public ACBaseAdapter getAdapter() {
@@ -442,6 +459,10 @@ public class ACRecyclerView extends FrameLayout {
 
     public void setMaxPage(int maxPage) {
         this.mMaxPage = maxPage;
+    }
+
+    public void setTotalItemsSize(int totalItemsSize) {
+        this.totalItemsSize = totalItemsSize;
     }
 
     public void setThresholdLoadMore(int threshold) {
@@ -509,7 +530,10 @@ public class ACRecyclerView extends FrameLayout {
 
         abstract public void bindData(T data);
 
-        public void onCreatedView(View view){};
+        public void onCreatedView(View view) {
+        }
+
+        ;
 
     }
 

@@ -17,6 +17,7 @@ import appscyclone.com.base.dagger.AppScope;
 import appscyclone.com.base.dagger.connect.ApiConfig;
 import appscyclone.com.base.dagger.connect.ApiConfigType;
 import appscyclone.com.base.data.network.api.StoryApi;
+import appscyclone.com.base.data.network.api.TestApi;
 import appscyclone.com.base.data.network.model.ErrorModel;
 import dagger.Module;
 import dagger.Provides;
@@ -32,7 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by NhatHoang on 15/05/2018.
  */
 
-@AppScope
+
 @Module
 public class NetworkModule {
     private static final long DISK_CACHE_SIZE = 50 * 1024 * 1024; // 50MB
@@ -42,6 +43,7 @@ public class NetworkModule {
         this.connectType = connectType;
     }
 
+    @AppScope
     @Provides
     public OkHttpClient provideOkHttpClient(Application app) {
         File cacheDir = new File(app.getCacheDir(), "http");
@@ -53,6 +55,7 @@ public class NetworkModule {
                 .build();
     }
 
+    @AppScope
     @Provides
     public Retrofit createRetrofit() {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
@@ -69,9 +72,16 @@ public class NetworkModule {
                 .build();
     }
 
+    @AppScope
     @Provides
     public StoryApi provideStoryApi(Retrofit restAdapter) {
         return restAdapter.create(StoryApi.class);
+    }
+
+    @AppScope
+    @Provides
+    public TestApi provideTestApi(Retrofit restAdapter) {
+        return restAdapter.create(TestApi.class);
     }
 
     @SuppressWarnings("ConstantConditions")
