@@ -2,12 +2,14 @@ package appscyclone.com.base.ui.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.appscyclone.aclibrary.view.ACRecyclerView;
+import com.appscyclone.aclibrary.view.adapter.ACBaseAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +35,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView,
     ACRecyclerView rvData;
 
     private List<ItemModel> mData;
-    private int page = 1;
+    private GridLayoutManager gridLayoutManager;
 
     @Nullable
     @Override
@@ -43,13 +45,14 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView,
         getActivityComponent().inject(this);
         presenterImp.onAttach(this);
         initialize();
-
         return view;
     }
 
 
     private void initialize() {
         mData = new ArrayList<>();
+        gridLayoutManager = new GridLayoutManager(getActivity(),2);
+        rvData.setLayoutManager(gridLayoutManager);
         rvData.setAdapter(HomeHolder.class, mData);
         rvData.setLoadMore(this);
         showLoading();

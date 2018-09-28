@@ -12,8 +12,10 @@ public class ItemModel extends BaseModel {
 
     @SerializedName("songTitle")
     private String title;
-    @SerializedName("share")
+    @SerializedName("url")
     private String imageUrl;
+    @SerializedName("slide")
+    private SlideModel slideModel;
 
     public String getTitle() {
         return title != null ? title : "";
@@ -21,5 +23,9 @@ public class ItemModel extends BaseModel {
 
     public String getImageUrl() {
         return imageUrl != null ? imageUrl : "";
+    }
+
+    public SlideModel getSlideModel() {
+        return slideModel;
     }
 }

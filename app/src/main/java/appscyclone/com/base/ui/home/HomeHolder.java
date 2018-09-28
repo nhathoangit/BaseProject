@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appscyclone.aclibrary.view.ACRecyclerView;
+import com.bumptech.glide.Glide;
 
 import appscyclone.com.base.R;
 import appscyclone.com.base.data.network.model.ItemModel;
@@ -15,18 +16,16 @@ import butterknife.ButterKnife;
  * Created by NhatHoang on 07/09/2018.
  */
 public class HomeHolder extends ACRecyclerView.ACBaseViewHolder<ItemModel> {
-    @BindView(R.id.itemTest_imgImageView)
-    ImageView imgImageView;
-    @BindView(R.id.itemTest_tvTitle)
-    TextView tvTitle;
+    @BindView(R.id.item_grid_ivTest)
+    ImageView ivTest;
 
     public HomeHolder(ViewGroup parent, int res) {
-        super(parent, R.layout.item_test);
+        super(parent, R.layout.item_grid_test);
         ButterKnife.bind(this, itemView);
     }
 
     @Override
     public void bindData(ItemModel data) {
-        tvTitle.setText(data.getTitle());
+        Glide.with(itemView).load(data.getSlideModel().getUrl()).into(ivTest);
     }
 }
