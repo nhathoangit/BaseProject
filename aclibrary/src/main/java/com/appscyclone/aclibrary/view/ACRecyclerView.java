@@ -179,21 +179,13 @@ public class ACRecyclerView extends FrameLayout {
     public void setLayoutManager(RecyclerView.LayoutManager manager) {
         if (manager instanceof GridLayoutManager) {
             GridLayoutManager gridLayoutManager = (GridLayoutManager) manager;
-            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    switch(getAdapter().getItemViewType(position)){
-                        case ACBaseAdapter.TYPE_ITEM:
-                            return 1;
-                        case ACBaseAdapter.TYPE_LOADING:
-                            return gridLayoutManager.getSpanCount();
-                        default:
-                            return -1;
-                    }
-                }
-            });
+            gridLayoutManager.setSpanSizeLookup(obtainGridSpanSizeLookUp(gridLayoutManager.getSpanCount()));
         }
         recyclerView.setLayoutManager(manager);
+    }
+
+    public GridSpanSizeLookup obtainGridSpanSizeLookUp(int maxCount) {
+        return new GridSpanSizeLookup(maxCount);
     }
 
     public void setPadding(int paddingLeft, int paddingTop, int paddingRight, int paddingBottom) {

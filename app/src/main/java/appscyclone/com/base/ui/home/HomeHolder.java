@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import com.appscyclone.aclibrary.view.ACRecyclerView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 import appscyclone.com.base.R;
 import appscyclone.com.base.data.network.model.ItemModel;
@@ -26,6 +28,6 @@ public class HomeHolder extends ACRecyclerView.ACBaseViewHolder<ItemModel> {
 
     @Override
     public void bindData(ItemModel data) {
-        Glide.with(itemView).load(data.getSlideModel().getUrl()).into(ivTest);
+        Glide.with(itemView).load(data.getSlideModel().getUrl()).apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL)).into(ivTest);
     }
 }
