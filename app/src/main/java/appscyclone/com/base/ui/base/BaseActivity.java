@@ -1,5 +1,6 @@
 package appscyclone.com.base.ui.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import appscyclone.com.base.others.dialog.LoadingDialog;
 import appscyclone.com.base.ui.main.MainActivity;
 import appscyclone.com.base.utils.NetworkUtils;
 import butterknife.Unbinder;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /*
  * Created by NhatHoang on 14/05/2018.
@@ -32,11 +34,6 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
 
     public ActivityComponent getActivityComponent() {
         return mActivityComponent;
-    }
-
-    @Override
-    public boolean isNetworkConnected() {
-        return NetworkUtils.isNetworkConnected(getApplicationContext());
     }
 
     @Override
@@ -108,6 +105,11 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
         for (int i = 0; i < count; ++i) {
             fm.popBackStack();
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
 }

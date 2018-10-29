@@ -29,11 +29,6 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     }
 
     @Override
-    public boolean isNetworkConnected() {
-        return getActivity() instanceof BaseActivity && ((BaseActivity) getActivity()).isNetworkConnected();
-    }
-
-    @Override
     public void addFragment(BaseFragment fragment, boolean isAddToBackStack, boolean isAnimation) {
         if (getActivity() instanceof BaseActivity) {
             ((BaseActivity) getActivity()).addFragment(fragment, false, isAnimation);

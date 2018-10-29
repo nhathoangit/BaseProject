@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">base</string>
+
+    <string name="message">Message</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="please_check_you_internet_connection">"Please check you internet connection!"</string>
 </resources>

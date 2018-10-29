@@ -15,4 +15,7 @@ import retrofit2.http.QueryMap;
 public interface TestApi {
     @GET("cityWorship")
     Observable<ResItemsModel> getDataTest(@QueryMap Map<String, Object> body);
+
+    @GET("http://api.themoviedb.org/3/")
+    Observable<ResItemsModel> getDataTest2();
 }
