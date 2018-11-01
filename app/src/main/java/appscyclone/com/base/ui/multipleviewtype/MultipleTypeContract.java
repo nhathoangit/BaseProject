@@ -1,4 +1,4 @@
-package appscyclone.com.base.ui.multipleview;
+package appscyclone.com.base.ui.multipleviewtype;
 
 import java.util.List;
 

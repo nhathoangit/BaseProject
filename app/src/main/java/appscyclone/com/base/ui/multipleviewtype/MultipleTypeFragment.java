@@ -1,9 +1,8 @@
-package appscyclone.com.base.ui.multipleview;
+package appscyclone.com.base.ui.multipleviewtype;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,6 @@ import appscyclone.com.base.data.network.model.ItemModel;
 import appscyclone.com.base.data.network.model.ResItemsModel;
 import appscyclone.com.base.others.view.CustomLinearLayoutManager;
 import appscyclone.com.base.ui.base.BaseFragment;
-import appscyclone.com.base.ui.home.HomeAdapter;
 import appscyclone.com.base.utils.AppUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;

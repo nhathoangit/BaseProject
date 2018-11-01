@@ -19,7 +19,7 @@ import appscyclone.com.base.R;
 import appscyclone.com.base.data.network.model.ItemModel;
 import appscyclone.com.base.data.network.model.ResItemsModel;
 import appscyclone.com.base.ui.base.BaseFragment;
-import appscyclone.com.base.ui.multipleview.MultipleTypeFragment;
+import appscyclone.com.base.ui.multipleviewtype.MultipleTypeFragment;
 import appscyclone.com.base.utils.AppUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;

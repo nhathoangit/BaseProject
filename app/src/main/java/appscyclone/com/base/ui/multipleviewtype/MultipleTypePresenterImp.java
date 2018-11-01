@@ -1,4 +1,4 @@
-package appscyclone.com.base.ui.multipleview;
+package appscyclone.com.base.ui.multipleviewtype;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +12,6 @@ import appscyclone.com.base.data.network.model.ErrorModel;
 import appscyclone.com.base.data.network.model.ItemModel;
 import appscyclone.com.base.others.constant.ApiKeyParam;
 import appscyclone.com.base.ui.base.BasePresenter;
-import appscyclone.com.base.ui.home.HomeContract;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
