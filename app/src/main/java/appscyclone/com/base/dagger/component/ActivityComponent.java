@@ -2,10 +2,9 @@ package appscyclone.com.base.dagger.component;
 
 import appscyclone.com.base.dagger.ActivityScope;
 import appscyclone.com.base.dagger.module.ActivityModule;
-import appscyclone.com.base.dagger.module.NetworkModule;
 import appscyclone.com.base.ui.home.HomeFragment;
 import appscyclone.com.base.ui.main.MainActivity;
-import dagger.Component;
+import appscyclone.com.base.ui.multipleview.MultipleTypeFragment;
 import dagger.Subcomponent;
 
 /*
@@ -19,5 +18,7 @@ public interface ActivityComponent {
     void inject(MainActivity activity);
 
     void inject(HomeFragment homeFragment);
+
+    void inject(MultipleTypeFragment multipleTypeFragment);
 
 }

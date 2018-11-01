@@ -1,13 +1,9 @@
 package appscyclone.com.base.ui.home;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.appscyclone.aclibrary.view.ACRecyclerView;
 import com.appscyclone.aclibrary.view.adapter.ACBaseAdapter;
@@ -35,7 +31,7 @@ public class HomeAdapter extends ACBaseAdapter<ACRecyclerView.ACBaseViewHolder> 
 
     @Override
     public ACRecyclerView.ACBaseViewHolder onCreateBaseViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_grid_test, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image, parent, false);
         return new HomeViewHolder(view);
     }
 
@@ -45,8 +41,8 @@ public class HomeAdapter extends ACBaseAdapter<ACRecyclerView.ACBaseViewHolder> 
     }
 
     static class HomeViewHolder extends ACRecyclerView.ACBaseViewHolder<ItemModel> {
-        @BindView(R.id.item_grid_ivTest)
-        ImageView ivTest;
+        @BindView(R.id.itemImage_ivImage)
+        ImageView ivImage;
 
         HomeViewHolder(View itemView) {
             super(itemView);
@@ -55,7 +51,7 @@ public class HomeAdapter extends ACBaseAdapter<ACRecyclerView.ACBaseViewHolder> 
 
         @Override
         public void bindData(ItemModel data) {
-            Glide.with(itemView).load(data.getSlideModel().getUrl()).apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL)).into(ivTest);
+            Glide.with(itemView).load(data.getSlideModel().getUrl()).apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL)).into(ivImage);
         }
     }
 }

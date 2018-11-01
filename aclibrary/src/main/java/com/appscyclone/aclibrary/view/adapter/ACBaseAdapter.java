@@ -26,7 +26,7 @@ import java.util.List;
 abstract public class ACBaseAdapter<VH extends ACRecyclerView.ACBaseViewHolder> extends RecyclerView.Adapter<VH> {
 
     public static final int TYPE_ITEM = 0;
-    public static final int TYPE_LOADING = 1;
+    public static final int TYPE_LOADING = -1;
 
     private List<?> mData;
     private Integer[] mArrIdRes;

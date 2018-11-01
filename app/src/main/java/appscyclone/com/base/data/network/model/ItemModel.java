@@ -16,6 +16,8 @@ public class ItemModel extends BaseModel {
     private String imageUrl;
     @SerializedName("slide")
     private SlideModel slideModel;
+    @SerializedName("homeFeed")
+    private boolean homeFeed;
 
     public String getTitle() {
         return title != null ? title : "";
@@ -27,5 +29,9 @@ public class ItemModel extends BaseModel {
 
     public SlideModel getSlideModel() {
         return slideModel;
+    }
+
+    public int isHomeFeed() {
+        return homeFeed ? 1 : 2;
     }
 }

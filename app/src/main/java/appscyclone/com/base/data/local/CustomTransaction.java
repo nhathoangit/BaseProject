@@ -10,21 +10,19 @@ public class CustomTransaction {
     public int containerViewId;
     public boolean isAnimation;
 
-    public CustomTransaction() {}
-
-    public CustomTransaction(@IdRes int containerViewId, boolean isAnimation)
-    {
-        this.containerViewId=containerViewId;
-        this.isAnimation=isAnimation;
+    public CustomTransaction() {
     }
 
-    public CustomTransaction(boolean isAnimation)
-    {
-        this.isAnimation=isAnimation;
+    public CustomTransaction(@IdRes int containerViewId, boolean isAnimation) {
+        this.containerViewId = containerViewId;
+        this.isAnimation = isAnimation;
     }
 
-    public CustomTransaction(@IdRes int containerViewId)
-    {
-        this.containerViewId=containerViewId;
+    public CustomTransaction(boolean isAnimation) {
+        this.isAnimation = isAnimation;
+    }
+
+    public CustomTransaction(@IdRes int containerViewId) {
+        this.containerViewId = containerViewId;
     }
 }

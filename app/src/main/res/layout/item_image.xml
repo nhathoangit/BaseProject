@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/item_grid_ivTest"
+        android:id="@+id/itemImage_ivImage"
         android:layout_width="@dimen/_160dp"
         android:layout_height="@dimen/_160dp"/>
 
