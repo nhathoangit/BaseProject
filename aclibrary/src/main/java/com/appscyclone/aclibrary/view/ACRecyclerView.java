@@ -24,6 +24,7 @@ import android.widget.FrameLayout;
 import com.appscyclone.aclibrary.R;
 import com.appscyclone.aclibrary.view.adapter.ACBaseAdapter;
 import com.appscyclone.aclibrary.view.adapter.ACExpandBaseAdapter;
+import com.appscyclone.aclibrary.view.adapter.ACHFBaseAdapter;
 import com.appscyclone.aclibrary.view.decoration.ACSpaceDecoration;
 import com.appscyclone.aclibrary.view.decoration.ACStickyHeaderDecoration;
 import com.appscyclone.aclibrary.view.model.ACBaseGroupModel;
@@ -34,7 +35,6 @@ import com.appscyclone.aclibrary.view.viewholder.ACTextViewHolder;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import static android.view.animation.Animation.RELATIVE_TO_SELF;
 
@@ -72,7 +72,7 @@ public class ACRecyclerView extends FrameLayout {
                     handler.post(() -> mAdapter.notifyItemInserted(mAdapter.getData().size() - 1));
                     onMoreListener.onLoadMore();
                     mAdapter.setLoading(true);
-                }else
+                } else
                     handler.removeCallbacksAndMessages(null);
             }
         }
@@ -537,8 +537,6 @@ public class ACRecyclerView extends FrameLayout {
         public void onCreatedView(View view) {
         }
 
-        ;
-
     }
 
     abstract static public class ACChildViewHolder<T> extends RecyclerView.ViewHolder {
@@ -622,16 +620,16 @@ public class ACRecyclerView extends FrameLayout {
 
         @Override
         public int getSpanSize(int position) {
-            if (onMoreListener != null) {
-                switch (mAdapter.getItemViewType(position)) {
-                    case ACBaseAdapter.TYPE_ITEM:
-                        return 1;
-                    case ACBaseAdapter.TYPE_LOADING:
-                        return this.mMaxCount;
-                    default:
-                        return -1;
-                }
-            } else return -1;
+            switch (mAdapter.getItemViewType(position)) {
+                case ACBaseAdapter.TYPE_ITEM:
+                    return 1;
+                case ACHFBaseAdapter.TYPE_HEADER:
+                case ACBaseAdapter.TYPE_LOADING:
+                case ACHFBaseAdapter.TYPE_FOOTER:
+                    return this.mMaxCount;
+                default:
+                    return -1;
+            }
         }
     }
 

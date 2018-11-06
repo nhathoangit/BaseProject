@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.appscyclone.aclibrary.view.ACRecyclerView;
 import com.appscyclone.aclibrary.view.adapter.ACBaseAdapter;
@@ -44,6 +45,9 @@ public class HomeAdapter extends ACBaseAdapter<ACRecyclerView.ACBaseViewHolder> 
         @BindView(R.id.itemImage_ivImage)
         ImageView ivImage;
 
+        @BindView(R.id.itemImage_tvText)
+        TextView tvText;
+
         HomeViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -51,6 +55,7 @@ public class HomeAdapter extends ACBaseAdapter<ACRecyclerView.ACBaseViewHolder> 
 
         @Override
         public void bindData(ItemModel data) {
+            tvText.setText(data.getTitle());
             Glide.with(itemView).load(data.getSlideModel().getUrl()).apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL)).into(ivImage);
         }
     }

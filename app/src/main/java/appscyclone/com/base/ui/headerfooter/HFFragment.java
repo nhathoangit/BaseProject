@@ -1,16 +1,18 @@
-package appscyclone.com.base.ui.home;
+package appscyclone.com.base.ui.headerfooter;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.appscyclone.aclibrary.view.ACRecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,32 +20,30 @@ import javax.inject.Inject;
 import appscyclone.com.base.R;
 import appscyclone.com.base.data.network.model.ItemModel;
 import appscyclone.com.base.data.network.model.ResItemsModel;
+import appscyclone.com.base.others.view.CustomLinearLayoutManager;
 import appscyclone.com.base.ui.base.BaseFragment;
-import appscyclone.com.base.ui.headerfooter.HFFragment;
-import appscyclone.com.base.ui.multipleviewtype.MultipleTypeFragment;
-import appscyclone.com.base.utils.AppUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /*
- * Created by NhatHoang on 06/09/2018.
+ * Created by NhatHoang on 02/11/2018.
  */
-public class HomeFragment extends BaseFragment implements HomeContract.HomeView, ACRecyclerView.OnLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class HFFragment extends BaseFragment implements ACRecyclerView.OnLoadMoreListener, HFContract.HFView {
 
     @Inject
-    HomePresenterImp presenterImp;
+    HFPresenterImp presenterImp;
 
-    @BindView(R.id.fragHome_rvData)
+    @BindView(R.id.fragMultipleType_rvData)
     ACRecyclerView rvData;
 
-    private GridLayoutManager gridLayoutManager;
-    private HomeAdapter adapter;
+    private HFAdapter adapter;
+    private List<ItemModel> models;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_multiple_type, container, false);
         setUnBinder(ButterKnife.bind(this, view));
         getActivityComponent().inject(this);
         presenterImp.onAttach(this);
@@ -52,33 +52,15 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView,
     }
 
     private void initialize() {
-        gridLayoutManager = new GridLayoutManager(getActivity(), 2);
-        rvData.setLayoutManager(gridLayoutManager);
+        rvData.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        models = new ArrayList<>();
+        //rvData.setLayoutManager(new CustomLinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         rvData.setHasFixedSize(true);
-        rvData.setLoadMore(this);
-        rvData.setRefresh(this);
+        //rvData.setLoadMore(this);
         showLoading();
         presenterImp.getListItems(rvData.getPage());
     }
 
-    @Override
-    public void loadListItems(List<ItemModel> data, int total) {
-        adapter = new HomeAdapter(data);
-        rvData.setAdapter(adapter);
-        rvData.setTotalItemsSize(total);
-    }
-
-    @Override
-    public void updateListItems(List<ItemModel> data,  ResItemsModel responseData) {
-        rvData.handleDataResponseByTotalItems(responseData.getTotal());
-        data.addAll(responseData.items);
-        rvData.notifyItemRangeInserted(rvData.getAdapter().getItemCount(), data.size());
-    }
-
-    @Override
-    public void loadDataError(String errorMessage) {
-        AppUtils.showDialogMessage(getActivity(), "Message", errorMessage, null);
-    }
 
     @Override
     public void onLoadMore() {
@@ -86,19 +68,29 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView,
     }
 
     @Override
-    public void onRefresh() {
-        presenterImp.getListItems(rvData.getPage());
+    public void loadListItems(List<ItemModel> data, int total) {
+        adapter = new HFAdapter(data, true, true);
+        rvData.setAdapter(adapter);
+        rvData.setTotalItemsSize(total);
+        models.addAll(data);
     }
 
     @Override
-    public void onDestroy() {
-        presenterImp.onDetach();
-        super.onDestroy();
+    public void updateListItems(List<ItemModel> data, ResItemsModel responseData) {
+        rvData.handleDataResponseByTotalItems(responseData.getTotal());
+        data.addAll(responseData.items);
+        models.addAll(responseData.items);
+        rvData.notifyItemRangeInserted(rvData.getAdapter().getItemCount(), data.size());
+
+    }
+
+    @Override
+    public void loadDataError(String errorMessage) {
+
     }
 
     @OnClick(R.id.fragHome_btnClick)
     public void onViewClicked() {
-        addFragment(new HFFragment(),true,false);
+        Toast.makeText(getContext(), models.size() + "", Toast.LENGTH_SHORT).show();
     }
-
 }
