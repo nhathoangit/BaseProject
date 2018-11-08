@@ -2,6 +2,7 @@ package appscyclone.com.base.dagger.component;
 
 import appscyclone.com.base.dagger.ActivityScope;
 import appscyclone.com.base.dagger.module.ActivityModule;
+import appscyclone.com.base.ui.expandview.ExpandFragment;
 import appscyclone.com.base.ui.headerfooter.HFFragment;
 import appscyclone.com.base.ui.home.HomeFragment;
 import appscyclone.com.base.ui.main.MainActivity;
@@ -23,5 +24,7 @@ public interface ActivityComponent {
     void inject(MultipleTypeFragment multipleTypeFragment);
 
     void inject(HFFragment hfFragment);
+
+    void inject(ExpandFragment expandFragment);
 
 }

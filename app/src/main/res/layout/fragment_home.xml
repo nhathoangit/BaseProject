@@ -9,7 +9,19 @@
         android:id="@+id/fragHome_btnClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Click me" />
+        android:text="HeaderFooter" />
+
+    <Button
+        android:id="@+id/fragHome_btnClick2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MultiviewType" />
+
+    <Button
+        android:id="@+id/fragHome_btnClick3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Expand" />
 
     <com.appscyclone.aclibrary.view.ACRecyclerView
         android:id="@+id/fragHome_rvData"

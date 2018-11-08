@@ -19,6 +19,7 @@ import appscyclone.com.base.R;
 import appscyclone.com.base.data.network.model.ItemModel;
 import appscyclone.com.base.data.network.model.ResItemsModel;
 import appscyclone.com.base.ui.base.BaseFragment;
+import appscyclone.com.base.ui.expandview.ExpandFragment;
 import appscyclone.com.base.ui.headerfooter.HFFragment;
 import appscyclone.com.base.ui.multipleviewtype.MultipleTypeFragment;
 import appscyclone.com.base.utils.AppUtils;
@@ -69,7 +70,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView,
     }
 
     @Override
-    public void updateListItems(List<ItemModel> data,  ResItemsModel responseData) {
+    public void updateListItems(List<ItemModel> data, ResItemsModel responseData) {
         rvData.handleDataResponseByTotalItems(responseData.getTotal());
         data.addAll(responseData.items);
         rvData.notifyItemRangeInserted(rvData.getAdapter().getItemCount(), data.size());
@@ -96,9 +97,20 @@ public class HomeFragment extends BaseFragment implements HomeContract.HomeView,
         super.onDestroy();
     }
 
-    @OnClick(R.id.fragHome_btnClick)
-    public void onViewClicked() {
-        addFragment(new HFFragment(),true,false);
+    @OnClick({R.id.fragHome_btnClick, R.id.fragHome_btnClick2, R.id.fragHome_btnClick3})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.fragHome_btnClick:
+                addFragment(new HFFragment(),true,false);
+                break;
+            case R.id.fragHome_btnClick2:
+                addFragment(new MultipleTypeFragment(),true,false);
+                break;
+            case R.id.fragHome_btnClick3:
+                addFragment(new ExpandFragment(),true,false);
+                break;
+        }
     }
+
 
 }
