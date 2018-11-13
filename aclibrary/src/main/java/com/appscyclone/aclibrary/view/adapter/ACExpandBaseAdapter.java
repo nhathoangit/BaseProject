@@ -106,8 +106,6 @@ public abstract class ACExpandBaseAdapter<GVH extends ACRecyclerView.ACParentVie
     }
     @Override
     public void onGroupExpanded(int positionStart, int itemCount) {
-        int headerPosition = positionStart - 1;
-        notifyItemChanged(headerPosition);
         if (itemCount > 0) {
             notifyItemRangeInserted(positionStart, itemCount);
             if (expandCollapseListener != null) {

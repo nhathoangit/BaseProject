@@ -40,6 +40,7 @@ public class ExpandAdapter extends ACExpandBaseAdapter<ExpandAdapter.ParentViewH
            holder.imageView.setRotation(180);
        }else
            holder.imageView.setRotation(360);
+
     }
 
     @Override

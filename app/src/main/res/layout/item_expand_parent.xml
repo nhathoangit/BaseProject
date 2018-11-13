@@ -26,7 +26,7 @@
         android:layout_width="@dimen/_32dp"
         android:layout_height="@dimen/_32dp"
         android:layout_gravity="center_vertical|end"
-        android:src="@android:drawable/arrow_down_float" />
+        android:src="@drawable/ic_arrow_right" />
 
 </FrameLayout>
 

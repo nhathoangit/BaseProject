@@ -515,7 +515,7 @@ public class ACRecyclerView extends FrameLayout {
     }
 
     public interface OnGroupClickListener {
-        boolean onGroupClick(int GroupPos);
+        boolean onGroupClick(int groupPos);
     }
 
     public interface GroupExpandCollapseListener {
