@@ -19,7 +19,8 @@ public class GenerateDataUtils {
         int max = 20;
         for (int i = 0; i < max; i++) {
             List<String> child = new ArrayList<>();
-            int maxChild = random.nextInt(10);
+            //int maxChild = random.nextInt(10);
+            int maxChild = 10;
             for (int j = 0; j < maxChild; j++) {
                 child.add("Child Number: " + random.nextInt(100));
             }

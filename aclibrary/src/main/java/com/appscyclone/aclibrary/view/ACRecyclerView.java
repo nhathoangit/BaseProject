@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.appscyclone.aclibrary.R;
 import com.appscyclone.aclibrary.view.adapter.ACBaseAdapter;
@@ -572,11 +573,10 @@ public class ACRecyclerView extends FrameLayout {
                 view = getViewRotate();
             if (listener != null) {
                 if (listener.onGroupClick(getAdapterPosition())) {
-                    collapse();
                     rotateView(false);
                 } else {
-                    expand();
                     rotateView(true);
+
                 }
             }
         }
@@ -586,7 +586,7 @@ public class ACRecyclerView extends FrameLayout {
                 return;
             RotateAnimation rotate =
                     new RotateAnimation(expand ? 360 : 180, expand ? 180 : 360, RELATIVE_TO_SELF, 0.5f, RELATIVE_TO_SELF, 0.5f);
-            rotate.setDuration(300);
+            rotate.setDuration(400);
             rotate.setFillAfter(true);
             view.startAnimation(rotate);
         }

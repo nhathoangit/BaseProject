@@ -3,9 +3,11 @@ package appscyclone.com.base.ui.expandview;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.appscyclone.aclibrary.view.ACRecyclerView;
 
@@ -23,14 +25,17 @@ public class ExpandFragment extends BaseFragment {
     @BindView(R.id.fragMultipleType_rvData)
     ACRecyclerView rvData;
 
+    private ExpandAdapter adapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_multiple_type, container, false);
         setUnBinder(ButterKnife.bind(this, view));
         getActivityComponent().inject(this);
-        rvData.setAdapter(ParentViewHolder.class, ChildViewHolder.class,
-                GenerateDataUtils.genDataExpandRecyclerView(), true);
+        rvData.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+        adapter = new ExpandAdapter(GenerateDataUtils.genDataExpandRecyclerView(),false);
+        rvData.setAdapter(adapter);
         //presenterImp.onAttach(this);
         //initialize();
         return view;

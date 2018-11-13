@@ -8,6 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ArrayRes;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -91,6 +92,11 @@ public abstract class ACExpandBaseAdapter<GVH extends ACRecyclerView.ACParentVie
         switch (listPos.type) {
             case ACExpandListPosition.GROUP:
                 onBindGroupViewHolder((GVH) holder, position, group);
+                if (isGroupExpanded(group)) {
+                    ((GVH) holder).expand();
+                } else {
+                    ((GVH) holder).collapse();
+                }
                 break;
             case ACExpandListPosition.CHILD:
                 onBindChildViewHolder((CVH) holder, position, group, listPos.childPos);
@@ -100,6 +106,8 @@ public abstract class ACExpandBaseAdapter<GVH extends ACRecyclerView.ACParentVie
     }
     @Override
     public void onGroupExpanded(int positionStart, int itemCount) {
+        int headerPosition = positionStart - 1;
+        notifyItemChanged(headerPosition);
         if (itemCount > 0) {
             notifyItemRangeInserted(positionStart, itemCount);
             if (expandCollapseListener != null) {
@@ -112,6 +120,8 @@ public abstract class ACExpandBaseAdapter<GVH extends ACRecyclerView.ACParentVie
 
     @Override
     public void onGroupCollapsed(int positionStart, int itemCount) {
+        int headerPosition = positionStart - 1;
+        notifyItemChanged(headerPosition);
         if (itemCount > 0) {
             notifyItemRangeRemoved(positionStart, itemCount);
             if (expandCollapseListener != null) {
@@ -126,6 +136,10 @@ public abstract class ACExpandBaseAdapter<GVH extends ACRecyclerView.ACParentVie
         return expandableList.groups;
     }
 
+    public boolean isGroupExpanded(ACBaseGroupModel group) {
+        return expandCollapseController.isGroupExpanded(group);
+    }
+
     @Override
     public int getItemCount() {
         return expandableList.getVisibleItemCount();
@@ -138,8 +152,8 @@ public abstract class ACExpandBaseAdapter<GVH extends ACRecyclerView.ACParentVie
 
     @Override
     public boolean onGroupClick(int GroupPos) {
-        if((GroupPos+1)==expandableList.groups.size())
-            notifyDataSetChanged();
+//        if((GroupPos+1)==expandableList.groups.size())
+//            notifyDataSetChanged();
         if (groupClickListener != null) {
             groupClickListener.onGroupClick(GroupPos);
         }
