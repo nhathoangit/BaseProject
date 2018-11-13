@@ -533,7 +533,8 @@ public class ACRecyclerView extends FrameLayout {
             super(view);
         }
 
-        abstract public void bindData(T data);
+        public void bindData(T data){
+        }
 
         public void onCreatedView(View view) {
         }
@@ -549,7 +550,7 @@ public class ACRecyclerView extends FrameLayout {
             super(itemView);
         }
 
-        abstract public void bindData(T data);
+        public void bindData(T data){};
     }
 
     abstract static public class ACParentViewHolder<T> extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -605,7 +606,7 @@ public class ACRecyclerView extends FrameLayout {
         public void collapse() {
         }
 
-        abstract public void bindData(T data);
+        public void bindData(T data){};
 
         abstract public View getViewRotate();
 

@@ -57,10 +57,6 @@ public class ExpandAdapter extends ACExpandBaseAdapter<ExpandAdapter.ParentViewH
         }
 
         @Override
-        public void bindData(Object data) {
-        }
-
-        @Override
         public View getViewRotate() {
             return imageView;
         }
@@ -71,11 +67,6 @@ public class ExpandAdapter extends ACExpandBaseAdapter<ExpandAdapter.ParentViewH
 
         ChildViewHolder(View itemView) {
             super(itemView);
-        }
-
-        @Override
-        public void bindData(Object data) {
-
         }
 
     }

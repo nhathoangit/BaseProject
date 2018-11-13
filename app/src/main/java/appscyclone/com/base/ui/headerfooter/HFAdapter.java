@@ -75,23 +75,12 @@ public class HFAdapter extends ACHFBaseAdapter<ACRecyclerView.ACBaseViewHolder> 
         HeaderViewHolder(View view) {
             super(view);
         }
-
-        @Override
-        public void bindData(Object data) {
-
-        }
     }
 
     class FooterViewHolder extends ACRecyclerView.ACBaseViewHolder {
         FooterViewHolder(View view) {
             super(view);
         }
-
-        @Override
-        public void bindData(Object data) {
-
-        }
     }
-
 
 }
