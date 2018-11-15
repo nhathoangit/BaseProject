@@ -1,4 +1,21 @@
+apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'com.android.library'
+
+publish {
+
+    def groupProjectID = 'com.appscyclone.aclibrary'
+    def artifactProjectID = 'ACCLib'
+    def publishVersionID = '1.0.0'
+
+    userOrg = 'nhathoang910'
+    repoName = 'ACCLib'
+    groupId = groupProjectID
+    artifactId = artifactProjectID
+    publishVersion = publishVersionID
+    desc = 'This is a library for Apps Cyclone'
+    website = 'https://github.com/nhathoangit/BaseProject'
+
+}
 
 android {
     compileSdkVersion 27
