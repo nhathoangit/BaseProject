@@ -1,4 +1,4 @@
-package appscyclone.com.base.dagger;
+package appscyclone.com.base.di;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

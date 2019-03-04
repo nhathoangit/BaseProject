@@ -1,11 +1,10 @@
-package appscyclone.com.base.dagger.component;
+package appscyclone.com.base.di.component;
 
 import javax.inject.Singleton;
 
-import appscyclone.com.base.dagger.AppScope;
-import appscyclone.com.base.dagger.module.ApplicationModule;
-import appscyclone.com.base.dagger.module.NetworkModule;
-import appscyclone.com.base.ui.base.BaseApplication;
+import appscyclone.com.base.di.AppScope;
+import appscyclone.com.base.di.module.ApplicationModule;
+import appscyclone.com.base.di.module.NetworkModule;
 import dagger.Component;
 
 /*

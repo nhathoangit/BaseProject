@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import appscyclone.com.base.R;
-import appscyclone.com.base.dagger.component.ActivityComponent;
+import appscyclone.com.base.di.component.ActivityComponent;
 import appscyclone.com.base.data.local.CustomTransaction;
 import appscyclone.com.base.others.dialog.LoadingDialog;
 import appscyclone.com.base.ui.main.MainActivity;

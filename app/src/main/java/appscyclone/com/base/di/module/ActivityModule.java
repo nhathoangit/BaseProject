@@ -1,10 +1,9 @@
-package appscyclone.com.base.dagger.module;
+package appscyclone.com.base.di.module;
 
 import android.app.Activity;
 import android.content.Context;
 
-import appscyclone.com.base.dagger.ActivityScope;
-import appscyclone.com.base.ui.main.MainPresenterImp;
+import appscyclone.com.base.di.ActivityScope;
 import dagger.Module;
 import dagger.Provides;
 

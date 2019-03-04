@@ -6,10 +6,10 @@ import android.content.Context;
 import javax.inject.Inject;
 
 import appscyclone.com.base.config.AppConfig;
-import appscyclone.com.base.dagger.component.ApplicationComponent;
-import appscyclone.com.base.dagger.component.DaggerApplicationComponent;
-import appscyclone.com.base.dagger.module.ApplicationModule;
-import appscyclone.com.base.dagger.module.NetworkModule;
+import appscyclone.com.base.di.component.ApplicationComponent;
+import appscyclone.com.base.di.component.DaggerApplicationComponent;
+import appscyclone.com.base.di.module.ApplicationModule;
+import appscyclone.com.base.di.module.NetworkModule;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /*

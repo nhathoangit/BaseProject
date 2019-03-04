@@ -1,4 +1,4 @@
-package appscyclone.com.base.dagger.connect;
+package appscyclone.com.base.di.connect;
 /*
  * Created by HoangDong on 08/11/2017.
  */

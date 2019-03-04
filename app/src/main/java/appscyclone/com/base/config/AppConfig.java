@@ -4,7 +4,7 @@ package appscyclone.com.base.config;
  */
 
 
-import appscyclone.com.base.dagger.connect.ApiConfigType;
+import appscyclone.com.base.di.connect.ApiConfigType;
 
 public class AppConfig {
     public static ApiConfigType mConnectType = ApiConfigType.STAGING;

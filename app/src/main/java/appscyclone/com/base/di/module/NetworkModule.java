@@ -1,8 +1,7 @@
-package appscyclone.com.base.dagger.module;
+package appscyclone.com.base.di.module;
 
 import android.app.Application;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -13,9 +12,9 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import appscyclone.com.base.R;
-import appscyclone.com.base.dagger.AppScope;
-import appscyclone.com.base.dagger.connect.ApiConfig;
-import appscyclone.com.base.dagger.connect.ApiConfigType;
+import appscyclone.com.base.di.AppScope;
+import appscyclone.com.base.di.connect.ApiConfig;
+import appscyclone.com.base.di.connect.ApiConfigType;
 import appscyclone.com.base.data.network.api.StoryApi;
 import appscyclone.com.base.data.network.api.TestApi;
 import appscyclone.com.base.data.network.model.ErrorModel;
@@ -25,7 +24,6 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;

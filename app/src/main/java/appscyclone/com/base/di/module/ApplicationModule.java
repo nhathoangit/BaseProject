@@ -1,4 +1,4 @@
-package appscyclone.com.base.dagger.module;
+package appscyclone.com.base.di.module;
 
 import android.app.Application;
 

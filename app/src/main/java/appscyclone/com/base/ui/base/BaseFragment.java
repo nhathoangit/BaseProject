@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 
 import java.util.Objects;
 
-import appscyclone.com.base.dagger.component.ActivityComponent;
+import appscyclone.com.base.di.component.ActivityComponent;
 import butterknife.Unbinder;
 
 /*
