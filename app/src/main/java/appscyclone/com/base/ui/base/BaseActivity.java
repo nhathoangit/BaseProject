@@ -9,13 +9,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import appscyclone.com.base.R;
-import appscyclone.com.base.di.component.ActivityComponent;
 import appscyclone.com.base.data.local.CustomTransaction;
+import appscyclone.com.base.di.component.ActivityComponent;
 import appscyclone.com.base.others.dialog.LoadingDialog;
 import appscyclone.com.base.ui.main.MainActivity;
 import appscyclone.com.base.utils.NetworkUtils;
+import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 
 /*
  * Created by NhatHoang on 14/05/2018.
@@ -26,10 +28,17 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
     private LoadingDialog mDialogView;
     private Unbinder mUnBinder;
 
+    protected abstract int getLayoutId();
+
+    protected abstract void initView();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivityComponent = BaseApplication.get(this).getComponent().inject();
+        setContentView(getLayoutId());
+        setUnBinder(ButterKnife.bind(this));
+        initView();
     }
 
     public ActivityComponent getActivityComponent() {

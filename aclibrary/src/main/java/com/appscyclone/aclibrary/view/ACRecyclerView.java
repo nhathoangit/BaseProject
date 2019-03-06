@@ -20,7 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.appscyclone.aclibrary.R;
 import com.appscyclone.aclibrary.view.adapter.ACBaseAdapter;
@@ -442,7 +441,8 @@ public class ACRecyclerView extends FrameLayout {
 
     private void hideAll() {
         frmEmptyView.setVisibility(View.GONE);
-        swipeRefresh.setRefreshing(false);
+        if (mHeight != -2)
+            swipeRefresh.setRefreshing(false);
         recyclerView.setVisibility(View.INVISIBLE);
     }
 
@@ -533,7 +533,7 @@ public class ACRecyclerView extends FrameLayout {
             super(view);
         }
 
-        public void bindData(T data){
+        public void bindData(T data) {
         }
 
         public void onCreatedView(View view) {
@@ -550,7 +550,10 @@ public class ACRecyclerView extends FrameLayout {
             super(itemView);
         }
 
-        public void bindData(T data){};
+        public void bindData(T data) {
+        }
+
+        ;
     }
 
     abstract static public class ACParentViewHolder<T> extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -606,7 +609,10 @@ public class ACRecyclerView extends FrameLayout {
         public void collapse() {
         }
 
-        public void bindData(T data){};
+        public void bindData(T data) {
+        }
+
+        ;
 
         abstract public View getViewRotate();
 
