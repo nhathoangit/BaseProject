@@ -3,7 +3,7 @@ package com.appscyclone.aclibrary.view.viewholder;
  * Created by HoangDong on 20/09/2017.
  */
 
-import android.support.annotation.LayoutRes;
+import androidx.annotation.LayoutRes;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;

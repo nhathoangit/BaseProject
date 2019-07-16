@@ -3,7 +3,7 @@ package appscyclone.com.base.data.local;
  * Created by HoangDong on 01/12/2017.
  */
 
-import android.support.annotation.IdRes;
+import androidx.annotation.IdRes;
 
 public class CustomTransaction {
     @IdRes

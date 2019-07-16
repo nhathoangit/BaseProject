@@ -3,15 +3,11 @@ package com.appscyclone.aclibrary.view.adapter;
  * Created by HoangDong on 19/09/2017.
  */
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.ArrayRes;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.annotation.ArrayRes;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import com.appscyclone.aclibrary.view.ACRecyclerView;
 import com.appscyclone.aclibrary.view.model.ACBaseGroupModel;

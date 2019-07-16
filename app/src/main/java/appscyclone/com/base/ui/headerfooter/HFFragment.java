@@ -1,10 +1,10 @@
 package appscyclone.com.base.ui.headerfooter;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +20,6 @@ import javax.inject.Inject;
 import appscyclone.com.base.R;
 import appscyclone.com.base.data.network.model.ItemModel;
 import appscyclone.com.base.data.network.model.ResItemsModel;
-import appscyclone.com.base.others.view.CustomLinearLayoutManager;
 import appscyclone.com.base.ui.base.BaseFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
