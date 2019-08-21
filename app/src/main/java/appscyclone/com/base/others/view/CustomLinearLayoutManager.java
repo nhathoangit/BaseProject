@@ -92,7 +92,7 @@ public class CustomLinearLayoutManager extends LinearLayoutManager {
             return;
         }
 
-        final boolean vertical = getOrientation() == VERTICAL;
+        final boolean vertical = getOrientation() == RecyclerView.VERTICAL;
 
         initChildDimensions(widthSize, heightSize, vertical);
 
