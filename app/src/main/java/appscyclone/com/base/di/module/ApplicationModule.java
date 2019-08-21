@@ -4,6 +4,7 @@ import android.app.Application;
 
 import javax.inject.Singleton;
 
+import appscyclone.com.base.ui.base.BaseApplication;
 import dagger.Module;
 import dagger.Provides;
 
@@ -12,16 +13,16 @@ import dagger.Provides;
  */
 @Module
 public class ApplicationModule {
-    private final Application mApplication;
+    private final BaseApplication application;
 
-    public ApplicationModule(Application application) {
-        mApplication = application;
+    public ApplicationModule(BaseApplication application) {
+        this.application = application;
     }
 
     @Provides
     @Singleton
     Application provideApplication() {
-        return mApplication;
+        return this.application;
     }
 
 }

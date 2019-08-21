@@ -6,7 +6,9 @@ import android.content.Context;
 import javax.inject.Inject;
 
 import appscyclone.com.base.config.AppConfig;
+import appscyclone.com.base.di.Injector;
 import appscyclone.com.base.di.component.ApplicationComponent;
+
 import appscyclone.com.base.di.component.DaggerApplicationComponent;
 import appscyclone.com.base.di.module.ApplicationModule;
 import appscyclone.com.base.di.module.NetworkModule;
@@ -19,7 +21,6 @@ public class BaseApplication extends Application {
 
     @Inject
     CalligraphyConfig calligraphyConfig;
-    private ApplicationComponent mApplicationComponent;
     private static BaseApplication mInstance;
 
     public static BaseApplication get(Context context) {
@@ -34,15 +35,8 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-        mApplicationComponent = DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this))
-                .networkModule(new NetworkModule(AppConfig.mConnectType))
-                .build();
-        mApplicationComponent.inject();
+        Injector.initialize(this);
         CalligraphyConfig.initDefault(calligraphyConfig);
     }
 
-    public ApplicationComponent getComponent() {
-        return mApplicationComponent;
-    }
 }

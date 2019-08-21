@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import appscyclone.com.base.R;
 import appscyclone.com.base.data.local.CustomTransaction;
+import appscyclone.com.base.di.Injector;
 import appscyclone.com.base.di.component.ActivityComponent;
 import appscyclone.com.base.others.dialog.LoadingDialog;
 import appscyclone.com.base.ui.main.MainActivity;
@@ -35,7 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActivityComponent = BaseApplication.get(this).getComponent().inject();
+        mActivityComponent = Injector.get().inject();
         setContentView(getLayoutId());
         setUnBinder(ButterKnife.bind(this));
         initView();
